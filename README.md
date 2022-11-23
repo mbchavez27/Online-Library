@@ -1,2 +1,2 @@
 # Online-Library
-Project for Odin Project using HTML, CSS, and JavaScript
+An Online Library web app that can add, change, remove books and its status made using HTML, CSS, JavaScript
