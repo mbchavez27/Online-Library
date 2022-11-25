@@ -1,0 +1,63 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+
+body {
+  font-family: "Nunito Sans", sans-serif;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 2em;
+  color: #f0fdf4;
+  background-color: #115e59;
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+  box-shadow: 5px 5px 10px 2px #a8a29e;
+}
+
+.headerLogo svg {
+  width: 3em;
+  height: 3em;
+  object-fit: cover;
+}
+
+.headerLogo {
+  display: flex;
+  align-items: center;
+  font-size: 1.3em;
+  gap: 0.5em;
+}
+
+.headerLogo:hover {
+  font-weight: bold;
+  transition: 0.5s;
+}
+
+.headerActions {
+  display: flex;
+  gap: 2.5em;
+}
+
+.headerActions button {
+  display: flex;
+  align-items: center;
+  font-family: "Nunito Sans", sans-serif;
+  background-color: #f0fdf4;
+  border: none;
+  border-radius: 0.5em;
+  padding: 1em;
+  gap: 0.5em;
+  color: #14532d;
+  font-size: 1em;
+}
+
+.headerActions button:hover {
+  opacity: 0.5;
+  transition: 0.2s;
+}
+.headerActions button:active {
+  opacity: 0.3;
+  transition: 0.2s;
+}
