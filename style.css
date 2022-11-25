@@ -80,6 +80,13 @@ header {
   margin: 1em;
 }
 
+.bookCards {
+  margin: 3em;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 4em;
+}
+
 .bookCard {
   display: flex;
   flex-direction: column;
