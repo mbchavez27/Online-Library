@@ -125,3 +125,45 @@ header {
   display: flex;
   justify-content: center;
 }
+
+.addBookForm form {
+  position: absolute;
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8fafc;
+  color: #14532d;
+  padding: 1.5em;
+  font-size: 1.25em;
+  border-radius: 1em;
+  gap: 2em;
+  border-bottom: 20px solid #14532d;
+  top: 5.5em;
+  right: 5.5em;
+  font-weight: bold;
+}
+
+.addBookForm input {
+  font-family: "Nunito Sans", sans-serif;
+  border: none;
+  border-radius: 1em;
+  background-color: #14532d;
+  color: #f8fafc;
+  padding: 0.5em;
+  outline: none;
+  margin-left: 1em;
+  accent-color: red;
+}
+
+.addBookForm input[type="checkbox"] {
+  background-color: green;
+}
+
+.addBookForm button {
+  padding: 0.5em;
+  padding-left: 1em;
+  padding-right: 1em;
+  background-color: #14532d;
+  color: #f8fafc;
+}

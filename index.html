@@ -19,7 +19,7 @@
       </div>
       <div class="headerActions">
         <div class="addBook">
-          <button type="button">
+          <button type="button" id="addBookButton">
             <svg style="width: 24px; height: 24px" viewBox="0 0 24 24">
               <path
                 fill="currentColor"
@@ -27,6 +27,50 @@
               /></svg
             >Add Book
           </button>
+          <div class="addBookForm">
+            <form class="addBookFormForm">
+              <p>
+                <label for="addBookTitle">Title:</label>
+                <input
+                  type="text"
+                  name="addBookTitle"
+                  value=""
+                  id="addBookTitle"
+                />
+              </p>
+              <p>
+                <label for="addBookAuthor">Author:</label>
+                <input
+                  type="text"
+                  name="addBookAuthor"
+                  value=""
+                  id="addBookAuthor"
+                />
+              </p>
+              <p>
+                <label for="addBookPages">Pages:</label>
+                <input
+                  type="number"
+                  name="addBookPages"
+                  value=""
+                  id="addBookPages"
+                  min="1"
+                />
+              </p>
+              <p>
+                <label for="addisBookRead">Read?</label>
+                <input
+                  type="checkbox"
+                  name="addBookRead"
+                  value=""
+                  id="addisBookRead"
+                />
+              </p>
+              <p>
+                <button>Add</button>
+              </p>
+            </form>
+          </div>
         </div>
         <div class="accountInfo">
           <button type="button">
