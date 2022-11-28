@@ -108,7 +108,6 @@ header {
 .bookIsRead {
   font-size: 1em;
   background-color: #14532d;
-  /* background-color: #7f1d1d; */
   color: #f0fdf4;
   padding: 0.5em;
   width: 100%;
@@ -116,6 +115,10 @@ header {
   justify-content: center;
   border-radius: 0.5em;
   gap: 0.5em;
+}
+
+.bookNotRead {
+  background-color: #7f1d1d;
 }
 
 .removeBook {
