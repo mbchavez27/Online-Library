@@ -9,6 +9,7 @@ document.querySelector("#addBookButton").addEventListener("click", () => {
 //Add Book
 let libraryCollection = [];
 
+//Book Object Constructor
 function Book(title, pages, author, isRead) {
   this.title = title;
   this.pages = pages;
@@ -16,18 +17,21 @@ function Book(title, pages, author, isRead) {
   this.isRead = isRead;
 }
 
-//Add Book
+//Submit Book
 document.querySelector("#submitBook").addEventListener("click", (book) => {
+  //Book Details
   let title = document.querySelector("#addBookTitle").value;
-  let pages = document.querySelector("#addBookAuthor").value;
-  let author = document.querySelector("#addBookPages").value;
+  let author = document.querySelector("#addBookAuthor").value;
+  let pages = document.querySelector("#addBookPages").value;
   let isRead = false;
+
   if (document.querySelector("#addisBookRead").checked) {
     isRead = true;
   } else {
     isRead = false;
   }
 
+  //If not empty
   if ((title !== "", pages !== "", author !== "")) {
     const newBook = new Book(title, pages, author, isRead);
     libraryCollection.push(newBook);
@@ -35,34 +39,42 @@ document.querySelector("#submitBook").addEventListener("click", (book) => {
   }
 });
 
+//book card container
 let bookCards = document.querySelector(".bookCards");
 
 function displayBook() {
-  deleteLibrary();
+  deleteLibrary(); //Reset Display Book
 
+  // Loops the whole Array
   libraryCollection.forEach((book, bookIndex) => {
+    //creates the individual book, adds class, and appends to card container
     let bookCard = document.createElement("div");
     bookCard.classList.add("bookCard");
     bookCards.appendChild(bookCard);
 
+    //creates the title, adds class, and appends to card container
     let bookTitle = document.createElement("div");
     bookTitle.classList.add("bookTitle");
     bookTitle.innerHTML = `<span>Title: </span> ${book.title}`;
     bookCard.appendChild(bookTitle);
 
+    //creates the author, adds class, and appends to card container
     let bookAuthor = document.createElement("div");
     bookAuthor.classList.add("bookAuthor");
     bookAuthor.innerHTML = `<span>Author: </span> ${book.author}`;
     bookCard.appendChild(bookAuthor);
 
+    //creates the pages, adds class, and appends to card container
     let bookPages = document.createElement("div");
     bookPages.classList.add("bookPages");
-    bookPages.innerHTML = `<span>Author: </span> ${book.pages}`;
+    bookPages.innerHTML = `<span>Pages: </span> ${book.pages}`;
     bookCard.appendChild(bookPages);
 
+    //creates the book status, adds class, data attributes and appends to card container
     let bookIsRead = document.createElement("div");
     bookIsRead.classList.add("bookIsRead");
     bookIsRead.dataset.bookIsRead = bookIndex;
+    //changes based on the boolean variable
     if (book.isRead) {
       bookIsRead.innerHTML = `<svg
                 style="width: 24px; height: 24px"
@@ -82,6 +94,7 @@ function displayBook() {
     }
     bookCard.appendChild(bookIsRead);
 
+    //creates the remove book, adds class, data attributes and appends to card container
     let removeBook = document.createElement("div");
     removeBook.classList.add("removeBook");
     removeBook.dataset.removeBook = bookIndex;
@@ -92,18 +105,24 @@ function displayBook() {
   });
 }
 
+//function to reset the book
 function deleteLibrary() {
   bookCards.innerHTML = "";
 }
 
+//events for dynamically created elements
 bookCards.addEventListener("click", (bookCard) => {
+  //for change book status
   if (bookCard.target.classList.contains("bookIsRead")) {
+    //changes book status to either true to false or false to true
     let bookID = bookCard.target.getAttribute("data-book-is-read");
     libraryCollection[bookID].isRead = !libraryCollection[bookID].isRead;
     displayBook();
   }
+  //for remove book
   if (bookCard.target.classList.contains("removeBook")) {
     let bookID = bookCard.target.getAttribute("data-remove-book");
+    //removes the book based on the book id
     libraryCollection.splice(bookID, 1);
     displayBook();
   }
