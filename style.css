@@ -115,6 +115,13 @@ header {
   justify-content: center;
   border-radius: 0.5em;
   gap: 0.5em;
+  font-family: "Nunito Sans", sans-serif;
+  align-items: center;
+  cursor: pointer;
+}
+
+.bookIsRead:hover {
+  opacity: 0.5;
 }
 
 .bookNotRead {
@@ -122,11 +129,23 @@ header {
 }
 
 .removeBook {
-  width: 2em;
-  height: 2em;
-  object-fit: cover;
   display: flex;
+  align-items: center;
   justify-content: center;
+  border: none;
+  background-color: #7f1d1d;
+  color: #f0fdf4;
+  font-family: "Nunito Sans", sans-serif;
+  font-size: 1em;
+  padding: 0.2em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+.removeBook:hover {
+  opacity: 0.5;
 }
 
 .addBookForm form {

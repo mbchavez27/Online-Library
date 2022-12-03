@@ -17,7 +17,7 @@ function Book(title, pages, author, isRead) {
 }
 
 //Add Book
-document.querySelector("#submitBook").addEventListener("click", () => {
+document.querySelector("#submitBook").addEventListener("click", (book) => {
   let title = document.querySelector("#addBookTitle").value;
   let pages = document.querySelector("#addBookAuthor").value;
   let author = document.querySelector("#addBookPages").value;
@@ -28,38 +28,43 @@ document.querySelector("#submitBook").addEventListener("click", () => {
     isRead = false;
   }
 
-  const newBook = new Book(title, pages, author, isRead);
-  libraryCollection.push(newBook);
-  displayBook();
+  if ((title !== "", pages !== "", author !== "")) {
+    const newBook = new Book(title, pages, author, isRead);
+    libraryCollection.push(newBook);
+    displayBook();
+  }
 });
 
+let bookCards = document.querySelector(".bookCards");
+
 function displayBook() {
-  let lastBook = libraryCollection[libraryCollection.length - 1];
-  const bookCards = document.querySelector(".bookCards");
+  deleteLibrary();
 
-  let bookCard = document.createElement("div");
-  bookCard.classList.add("bookCard");
-  bookCards.appendChild(bookCard);
+  libraryCollection.forEach((book, bookIndex) => {
+    let bookCard = document.createElement("div");
+    bookCard.classList.add("bookCard");
+    bookCards.appendChild(bookCard);
 
-  let bookTitle = document.createElement("div");
-  bookTitle.classList.add("bookTitle");
-  bookTitle.innerHTML = `<span>Title: </span> ${lastBook.title}`;
-  bookCard.appendChild(bookTitle);
+    let bookTitle = document.createElement("div");
+    bookTitle.classList.add("bookTitle");
+    bookTitle.innerHTML = `<span>Title: </span> ${book.title}`;
+    bookCard.appendChild(bookTitle);
 
-  let bookAuthor = document.createElement("div");
-  bookAuthor.classList.add("bookAuthor");
-  bookAuthor.innerHTML = `<span>Author: </span> ${lastBook.author}`;
-  bookCard.appendChild(bookAuthor);
+    let bookAuthor = document.createElement("div");
+    bookAuthor.classList.add("bookAuthor");
+    bookAuthor.innerHTML = `<span>Author: </span> ${book.author}`;
+    bookCard.appendChild(bookAuthor);
 
-  let bookPages = document.createElement("div");
-  bookPages.classList.add("bookPages");
-  bookPages.innerHTML = `<span>Author: </span> ${lastBook.pages}`;
-  bookCard.appendChild(bookPages);
+    let bookPages = document.createElement("div");
+    bookPages.classList.add("bookPages");
+    bookPages.innerHTML = `<span>Author: </span> ${book.pages}`;
+    bookCard.appendChild(bookPages);
 
-  let bookIsRead = document.createElement("div");
-  bookIsRead.classList.add("bookIsRead");
-  if (lastBook.isRead) {
-    bookIsRead.innerHTML = `<svg
+    let bookIsRead = document.createElement("div");
+    bookIsRead.classList.add("bookIsRead");
+    bookIsRead.dataset.bookIsRead = bookIndex;
+    if (book.isRead) {
+      bookIsRead.innerHTML = `<svg
                 style="width: 24px; height: 24px"
                 viewBox="0 0 24 24"
                 class="checkMark"
@@ -70,20 +75,36 @@ function displayBook() {
                 />
               </svg>
               Read`;
-    bookIsRead.classList.remove("bookNotRead");
-  } else {
-    bookIsRead.innerHTML = "Not Read";
-    bookIsRead.classList.add("bookNotRead");
-  }
-  bookCard.appendChild(bookIsRead);
+      bookIsRead.classList.remove("bookNotRead");
+    } else {
+      bookIsRead.innerHTML = "Not Read";
+      bookIsRead.classList.add("bookNotRead");
+    }
+    bookCard.appendChild(bookIsRead);
 
-  let removeBook = document.createElement("div");
-  removeBook.classList.add("removeBook");
-  removeBook.innerHTML = `<svg viewBox="0 0 24 24">
-                <path
-                  fill="currentColor"
-                  d="M9,3V4H4V6H5V19A2,2 0 0,0 7,21H17A2,2 0 0,0 19,19V6H20V4H15V3H9M7,6H17V19H7V6M9,8V17H11V8H9M13,8V17H15V8H13Z"
-                />
-              </svg>`;
-  bookCard.appendChild(removeBook);
+    let removeBook = document.createElement("div");
+    removeBook.classList.add("removeBook");
+    removeBook.dataset.removeBook = bookIndex;
+    removeBook.innerHTML = `<svg style="width:24px;height:24px" viewBox="0 0 24 24">
+    <path fill="currentColor" d="M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19M8,9H16V19H8V9M15.5,4L14.5,3H9.5L8.5,4H5V6H19V4H15.5Z" />
+</svg>Delete`;
+    bookCard.appendChild(removeBook);
+  });
 }
+
+function deleteLibrary() {
+  bookCards.innerHTML = "";
+}
+
+bookCards.addEventListener("click", (bookCard) => {
+  if (bookCard.target.classList.contains("bookIsRead")) {
+    let bookID = bookCard.target.getAttribute("data-book-is-read");
+    libraryCollection[bookID].isRead = !libraryCollection[bookID].isRead;
+    displayBook();
+  }
+  if (bookCard.target.classList.contains("removeBook")) {
+    let bookID = bookCard.target.getAttribute("data-remove-book");
+    libraryCollection.splice(bookID, 1);
+    displayBook();
+  }
+});
